@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOLAP | Crear cuenta</title>
+    <link rel="icon" type="image/png" href="../Img/ecolap.png">
+    <style>
+        :root {
+            --bg-1: #04140d;
+            --bg-2: #06301f;
+            --verde-neon: #39e58c;
+            --verde-medio: #00a86b;
+            --verde-oscuro: #063b29;
+            --panel: rgba(6, 40, 27, 0.55);
+            --panel-borde: rgba(57, 229, 140, 0.28);
+            --input-bg: rgba(3, 20, 13, 0.65);
+            --texto-claro: #eafff2;
+            --texto-tenue: #9fc9b3;
+            --error: #ff6b6b;
+            --exito: #6dffb3;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(57, 229, 140, .16), transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(0, 168, 107, .18), transparent 45%),
+                linear-gradient(160deg, var(--bg-1), var(--bg-2));
+            color: var(--texto-claro);
+        }
+
+        /* ---------- Navbar ---------- */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 42px;
+            background: rgba(4, 20, 13, 0.55);
+            border-bottom: 1px solid rgba(57, 229, 140, .15);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--verde-medio), var(--verde-neon));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 0 18px rgba(57, 229, 140, .5);
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: .5px;
+        }
+        .brand-name span { color: var(--verde-neon); }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 999px;
+            border: 1px solid var(--panel-borde);
+            color: var(--texto-claro);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: .2s ease;
+            background: rgba(255, 255, 255, .02);
+        }
+        .back-link:hover {
+            background: rgba(57, 229, 140, .1);
+            border-color: var(--verde-neon);
+        }
+
+        /* ---------- Layout principal ---------- */
+        .contenido {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 40px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 42px 80px;
+            align-items: start;
+        }
+
+        /* ---------- Columna izquierda ---------- */
+        .panel-izq { padding-top: 12px; }
+
+        .globo {
+            width: 92px;
+            height: 92px;
+            border-radius: 24px;
+            background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.15), transparent 60%), rgba(57, 229, 140, .12);
+            border: 1px solid var(--panel-borde);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 44px;
+            margin-bottom: 28px;
+            box-shadow: 0 0 40px rgba(57, 229, 140, .18);
+        }
+
+        .titulo-hero {
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin: 0 0 20px;
+        }
+        .titulo-hero .resalte { color: var(--verde-neon); }
+
+        .parrafo-hero {
+            color: var(--texto-tenue);
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 480px;
+            margin: 0 0 36px;
+        }
+
+        /* ---------- Columna derecha: tarjeta de login ---------- */
+        .panel-der {
+            background: var(--panel);
+            border: 1px solid var(--panel-borde);
+            border-radius: 26px;
+            padding: 34px;
+            box-shadow: 0 25px 60px rgba(0,0,0,.45);
+            backdrop-filter: blur(8px);
+        }
+
+        .tabs {
+            display: flex;
+            background: rgba(255,255,255,.04);
+            border-radius: 999px;
+            padding: 5px;
+            margin-bottom: 26px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 14.5px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--texto-tenue);
+            transition: .2s ease;
+        }
+        .tab.activo {
+            background: linear-gradient(120deg, var(--verde-medio), var(--verde-neon));
+            color: #063018;
+            box-shadow: 0 6px 18px rgba(57, 229, 140, .35);
+        }
+
+        .btn-google {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            background: #fff;
+            color: #1f1f1f;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+        .btn-google:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+        .g-icon {
+            font-weight: 900;
+            color: #4285F4;
+            font-size: 18px;
+        }
+
+        .divisor {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 26px 0;
+            color: var(--texto-tenue);
+            font-size: 13px;
+        }
+        .divisor::before, .divisor::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,.12);
+        }
+
+        .form-group { margin-bottom: 18px; text-align: left; }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-bottom: 8px;
+            font-size: 12.5px;
+            font-weight: 800;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            color: var(--verde-neon);
+        }
+
+        .input-wrap { position: relative; }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1.5px solid rgba(57, 229, 140, .2);
+            background: var(--input-bg);
+            color: var(--texto-claro);
+            font-size: 15px;
+            outline: none;
+            transition: .2s ease;
+        }
+        input::placeholder { color: #5f8672; }
+        input:focus {
+            border-color: var(--verde-neon);
+            box-shadow: 0 0 0 4px rgba(57, 229, 140, .15);
+        }
+
+        .toggle-pass {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            opacity: .7;
+            padding: 4px;
+        }
+
+        .fila-opciones {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--texto-tenue);
+            margin: 4px 0 22px;
+        }
+
+        .recordarme { display: flex; align-items: center; gap: 8px; }
+        .recordarme input { width: auto; padding: 0; accent-color: var(--verde-neon); }
+
+        .fila-opciones a { color: var(--verde-neon); text-decoration: none; font-weight: 600; }
+        .fila-opciones a:hover { text-decoration: underline; }
+
+        button.submit-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 800;
+            color: #06301f;
+            background: linear-gradient(120deg, var(--verde-medio), var(--verde-neon));
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 0 30px rgba(57, 229, 140, .35);
+            transition: .2s ease;
+        }
+        button.submit-button:hover:not(:disabled) {
+            filter: brightness(1.07);
+            transform: translateY(-2px);
+        }
+        button.submit-button:disabled { opacity: .7; cursor: not-allowed; transform: none; }
+
+        .spinner {
+            width: 16px; height: 16px;
+            border: 2.5px solid rgba(6,48,31,.35);
+            border-top-color: #06301f;
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            display: none;
+        }
+        .spinner.visible { display: inline-block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .message {
+            min-height: 20px;
+            margin-top: 14px;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .error { color: var(--error); }
+        .success { color: var(--exito); }
+
+        .crear-cuenta {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 14px;
+            color: var(--texto-tenue);
+        }
+        .crear-cuenta a { color: var(--verde-neon); font-weight: 700; text-decoration: none; }
+        .crear-cuenta a:hover { text-decoration: underline; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+        .shake { animation: shake .35s; }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 980px) {
+            .contenido { grid-template-columns: 1fr; padding: 40px 24px 60px; }
+            .titulo-hero { font-size: 32px; }
+        }
+        @media (max-width: 480px) {
+            .navbar { padding: 14px 18px; }
+            .panel-der { padding: 24px; }
+        }
+    </style>
+    <style>
+        .registro-note { color: var(--texto-tenue); font-size: 13px; line-height: 1.5; margin: 0 0 20px; }
+        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+        .form-grid .form-group { margin-bottom:0; }
+        .password-help { color:var(--texto-tenue); font-size:12px; margin-top:7px; }
+        @media (max-width: 600px) { .form-grid { grid-template-columns:1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <div class="brand-icon">🌱</div>
+            <div class="brand-name">ECO<span>LAP</span></div>
+        </div>
+        <a href="index.html" class="back-link">← Volver a ECOLAP</a>
+    </nav>
+
+    <div class="contenido">
+        <section class="panel-izq">
+            <div class="globo">🌎</div>
+            <h1 class="titulo-hero">Únete al cambio <span class="resalte">verde</span> con ECOLAP</h1>
+            <p class="parrafo-hero">
+                Crea tu cuenta para participar en las actividades de reciclaje, solicitar recolecciones y hacer parte de la comunidad ECOLAP.
+            </p>
+        </section>
+
+        <section class="panel-der">
+            <div class="tabs">
+                <button class="tab" id="tabLogin" type="button">Iniciar Sesión</button>
+                <button class="tab activo" id="tabRegistro" type="button">Registrarse</button>
+            </div>
+
+            <div class="divisor">Crea tu cuenta ECOLAP</div>
+
+            <form id="registerForm" autocomplete="on">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nombre">👤 Nombre completo</label>
+                        <div class="input-wrap">
+                            <input type="text" id="nombre" placeholder="Tu nombre completo" autocomplete="name" maxlength="100" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">📱 Teléfono</label>
+                        <div class="input-wrap">
+                            <input type="tel" id="telefono" placeholder="300 000 0000" autocomplete="tel" maxlength="20">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top:18px;">
+                    <label for="email">✉️ Correo electrónico</label>
+                    <div class="input-wrap">
+                        <input type="email" id="email" placeholder="tu@correo.com" autocomplete="email" maxlength="150" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">🔒 Contraseña</label>
+                    <div class="input-wrap">
+                        <input type="password" id="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" minlength="6" required style="padding-right:42px;">
+                        <button type="button" class="toggle-pass" id="togglePass" aria-label="Mostrar contraseña">👁️</button>
+                    </div>
+                    <div class="password-help">La contraseña se guardará de forma segura en la base de datos.</div>
+                </div>
+
+                <button type="submit" class="submit-button" id="submitButton">
+                    <span class="spinner" id="spinner"></span>
+                    <span id="submitText">Crear cuenta ECOLAP</span>
+                </button>
+
+                <div id="message" class="message" role="status"></div>
+            </form>
+
+            <div class="crear-cuenta">
+                ¿Ya tienes cuenta? <a href="login.html">Inicia sesión en ECOLAP</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const form = document.getElementById('registerForm');
+        const message = document.getElementById('message');
+        const submitButton = document.getElementById('submitButton');
+        const submitText = document.getElementById('submitText');
+        const spinner = document.getElementById('spinner');
+        const passwordInput = document.getElementById('password');
+        const togglePass = document.getElementById('togglePass');
+        const panelDer = document.querySelector('.panel-der');
+
+        document.getElementById('tabLogin').addEventListener('click', () => window.location.href = 'login.html');
+
+        togglePass.addEventListener('click', () => {
+            const visible = passwordInput.type === 'text';
+            passwordInput.type = visible ? 'password' : 'text';
+            togglePass.textContent = visible ? '👁️' : '🙈';
+        });
+
+        function mostrarMensaje(texto, tipo = '') {
+            message.textContent = texto;
+            message.className = `message ${tipo}`;
+        }
+
+        function cargar(cargando) {
+            submitButton.disabled = cargando;
+            spinner.classList.toggle('visible', cargando);
+            submitText.textContent = cargando ? 'Creando cuenta...' : 'Crear cuenta ECOLAP';
+        }
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            mostrarMensaje('');
+
+            const datos = {
+                nombre: document.getElementById('nombre').value.trim(),
+                email: document.getElementById('email').value.trim().toLowerCase(),
+                telefono: document.getElementById('telefono').value.trim(),
+                password: passwordInput.value
+            };
+
+            if (!datos.nombre || !datos.email || !datos.password) {
+                mostrarMensaje('Completa los campos obligatorios.');
+                return;
+            }
+
+            if (datos.password.length < 6) {
+                mostrarMensaje('La contraseña debe tener mínimo 6 caracteres.');
+                return;
+            }
+
+            cargar(true);
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datos)
+                });
+
+                const data = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(data.mensaje || data.error || 'No se pudo crear la cuenta.');
+                }
+
+                mostrarMensaje('Cuenta creada correctamente. Ahora puedes iniciar sesión.', 'success');
+                form.reset();
+
+                setTimeout(() => window.location.href = 'login.html', 1200);
+            } catch (error) {
+                console.error('Error de registro:', error);
+                mostrarMensaje(error.message || 'No se pudo conectar con el servidor.');
+                panelDer.classList.remove('shake');
+                void panelDer.offsetWidth;
+                panelDer.classList.add('shake');
+            } finally {
+                cargar(false);
+            }
+        });
+    </script>
+</body>
+</html>
