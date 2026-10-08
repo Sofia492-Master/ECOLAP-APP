@@ -439,7 +439,7 @@
 
         function mostrarMensaje(texto, tipo = '') {
             message.textContent = texto;
-            message.className = `message ${tipo}`;
+            message.className = message ${tipo};
         }
 
         function cargar(cargando) {
@@ -472,17 +472,15 @@
             cargar(true);
 
             try {
-                const response = await fetch('/api/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(datos)
-                });
-
-                const data = await response.json().catch(() => ({}));
-
-                if (!response.ok) {
-                    throw new Error(data.mensaje || data.error || 'No se pudo crear la cuenta.');
+                
+                await new Promise(resolve => setTimeout(resolve, 600));
+                const usuarios = JSON.parse(localStorage.getItem('ecolap_usuarios')) || [];
+                if (usuarios.some(u => u.email === datos.email)) {
+                    throw new Error('Ese correo ya está registrado.');
                 }
+
+                usuarios.push(datos);
+                localStorage.setItem('ecolap_usuarios', JSON.stringify(usuarios));
 
                 mostrarMensaje('Cuenta creada correctamente. Ahora puedes iniciar sesión.', 'success');
                 form.reset();
